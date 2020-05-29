@@ -50,8 +50,6 @@ let verticalRightWin = 0;
 let diagonalLeftWin = 0;
 let diagonalRightWin = 0;
 
-//Beepity boopity bop!
-
 let horizontalTopWinTwo = 0;
 let horizontalMiddleWinTwo = 0;
 let horizontalBottomWinTwo = 0;
@@ -84,6 +82,7 @@ function firstTurn() {
     let winCheck = () => {
         if (diagonalLeftWin == 3 || diagonalRightWin == 3 || horizontalTopWin == 3 || horizontalMiddleWin == 3 || horizontalBottomWin == 3 || verticalLeftWin == 3 || verticalMiddleWin == 3 || verticalRightWin == 3) {
         const winnerVar = document.createElement('p')
+        winnerVar.id = 'winID'
         winnerVar.textContent = 'Player X has won!'
         const bodyVar = document.getElementById('body')
         bodyVar.appendChild(winnerVar)
@@ -247,6 +246,7 @@ function secondTurn() {
     let winCheckTwo = () => {
         if (diagonalLeftWinTwo == 3 || diagonalRightWinTwo == 3 || horizontalTopWinTwo == 3 || horizontalMiddleWinTwo == 3 || horizontalBottomWinTwo == 3 || verticalLeftWinTwo == 3 || verticalMiddleWinTwo == 3 || verticalRightWinTwo == 3) {
         const winnerVar = document.createElement('p')
+        winnerVar.id = 'winID'
         winnerVar.textContent = 'Player O has won!'
         const bodyVar = document.getElementById('body')
         bodyVar.appendChild(winnerVar)
@@ -388,6 +388,69 @@ function secondTurn() {
 function gameFlow() {
     gameSpace.thisTurn ? firstTurn() : secondTurn();
 }  
+
+document.getElementById('restartButton').addEventListener('click', () => {
+
+    const squareOne = gameSpace.firstSquare
+    const squareTwo = gameSpace.secondSquare
+    const squareThree = gameSpace.thirdSquare
+    const squareFour = gameSpace.fourthSquare
+    const squareFive = gameSpace.fifthSquare
+    const squareSix = gameSpace.sixthSquare
+    const squareSeven = gameSpace.seventhSquare
+    const squareEight = gameSpace.eigthSquare
+    const squareNine = gameSpace.ninthSquare
+
+    horizontalTopWin = 0;
+    horizontalMiddleWin = 0;
+    horizontalBottomWin = 0;
+    
+    verticalLeftWin = 0;
+    verticalMiddleWin = 0;
+    verticalRightWin = 0;
+    
+    diagonalLeftWin = 0;
+    diagonalRightWin = 0;
+    
+    horizontalTopWinTwo = 0;
+    horizontalMiddleWinTwo = 0;
+    horizontalBottomWinTwo = 0;
+    
+    verticalLeftWinTwo = 0;
+    verticalMiddleWinTwo = 0;
+    verticalRightWinTwo = 0;
+    
+    diagonalLeftWinTwo = 0;
+    diagonalRightWinTwo = 0;
+
+    gameSpace.squareYi = true
+    gameSpace.squareEr = true
+    gameSpace.squareSan = true
+    gameSpace.squareSi = true
+    gameSpace.squareWu = true
+    gameSpace.squareLiu = true
+    gameSpace.squareQi = true
+    gameSpace.squareBa = true
+    gameSpace.squareNiu = true
+
+    squareOne.textContent = '';
+    squareTwo.textContent = '';
+    squareThree.textContent = '';
+    squareFour.textContent = '';
+    squareFive.textContent = '';
+    squareSix.textContent = '';
+    squareSeven.textContent = '';
+    squareEight.textContent = '';
+    squareNine.textContent ='';
+
+    gameSpace.thisTurn = true;
+
+    let bodyVar = document.getElementById('body')
+
+    bodyVar.textContent = ''
+
+    gameFlow()
+})
 
 document.addEventListener('DOMContentLoaded', function gameStart() {
     
