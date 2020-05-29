@@ -358,7 +358,7 @@ function secondTurn() {
     gameSpace.eigthSquare.addEventListener('click', () => {
         if (gameSpace.squareBa == true && gameSpace.thisTurn ==true) {
         twoArray.push(squareEight)
-        verticalBottomWinTwo += 1
+        verticalMiddleWinTwo += 1
         horizontalBottomWinTwo += 1
         winCheckTwo()
         gameSpace.squareBa = false;
