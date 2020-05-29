@@ -1,18 +1,3 @@
-//To-do list:
-
-//Code win condition
-
-//Win conditions: 3 horizontal wins, 3 vertical wins, 2 diagonal wins
-//Horizontal wins: (firstSquare THRU thirdSquare, fourthSquare THRU sixthSquare, seventhSquare THRU ninthSquare)
-//Vertical wins: (1SQ & 4SQ & 7SQ, 3SQ & 6SQ & 9SQ, 2SQ, 5SQ, 8SQ)
-//Diagonal wins: (1 SQ & 5SQ & 9SQ, 3 SQ & 5SQ & 7SQ)
-
-//Clean global scope
-
-//Personal motivation:
-//I know exactly how to do rest of tasks and am done w/ thinking part of project! 
-//Only hard labor left...maybe use a slave? heheh
-
 (function gameBoardCreator() {
 for (let i=0; i<9; i++) {
 
@@ -48,16 +33,37 @@ let gameSpace = {
     squareBa: true,
     squareNiu: true,
 
-    thisTurn: true
+    thisTurn: true,
+
+    whileLooper: true,
+
 }
 
+let horizontalTopWin = 0;
+let horizontalMiddleWin = 0;
+let horizontalBottomWin = 0;
+
+let verticalLeftWin = 0;
+let verticalMiddleWin = 0;
+let verticalRightWin = 0;
+
+let diagonalLeftWin = 0;
+let diagonalRightWin = 0;
+
+//Beepity boopity bop!
+
+let horizontalTopWinTwo = 0;
+let horizontalMiddleWinTwo = 0;
+let horizontalBottomWinTwo = 0;
+
+let verticalLeftWinTwo = 0;
+let verticalMiddleWinTwo = 0;
+let verticalRightWinTwo = 0;
+
+let diagonalLeftWinTwo = 0;
+let diagonalRightWinTwo = 0;
+
 function firstTurn() {
-
-    gameSpace.thisTurn = false;
-
-    console.log('firstTurn is active!')
-
-    let oneArray = ['oneA'];
 
     const squareOne = gameSpace.firstSquare
     const squareTwo = gameSpace.secondSquare
@@ -69,13 +75,29 @@ function firstTurn() {
     const squareEight = gameSpace.eigthSquare
     const squareNine = gameSpace.ninthSquare
 
-    if (oneArray.includes(gameSpace.firstSquare)) {
-        squareTwo.textContent = 'jk'
-    }
-    //push the string of 1SQ instead of const value?
+    gameSpace.thisTurn = false;
+
+    console.log('firstTurn is active!')
+
+    let oneArray = []
+
+    let winCheck = () => {
+        if (diagonalLeftWin == 3 || diagonalRightWin == 3 || horizontalTopWin == 3 || horizontalMiddleWin == 3 || horizontalBottomWin == 3 || verticalLeftWin == 3 || verticalMiddleWin == 3 || verticalRightWin == 3) {
+        const winnerVar = document.createElement('p')
+        winnerVar.textContent = 'Player X has won!'
+        const bodyVar = document.getElementById('body')
+        bodyVar.appendChild(winnerVar)
+        console.log(oneArray)
+    }else {console.log('winCheck returned false!')}}
+
     gameSpace.firstSquare.addEventListener('click', () => {
         if (gameSpace.squareYi == true && gameSpace.thisTurn == false) {
         oneArray.push(squareOne)
+        horizontalTopWin += 1
+        verticalLeftWin += 1
+        diagonalLeftWin += 1
+        winCheck()
+        console.log(horizontalTopWin)
         gameSpace.squareYi = false,
         console.log(oneArray)
         gameFlow()
@@ -87,6 +109,9 @@ function firstTurn() {
     gameSpace.secondSquare.addEventListener('click', () => {
         if (gameSpace.squareEr == true && gameSpace.thisTurn == false) {
         oneArray.push(squareTwo)
+        horizontalTopWin += 1
+        verticalMiddleWin += 1
+        winCheck()
         gameSpace.squareEr = false;
         console.log(oneArray)
         gameFlow();
@@ -98,6 +123,10 @@ function firstTurn() {
     gameSpace.thirdSquare.addEventListener('click', () => {
         if (gameSpace.squareSan == true && gameSpace.thisTurn == false) {
         oneArray.push(squareThree)
+        horizontalTopWin += 1
+        verticalRightWin += 1
+        diagonalRightWin += 1
+        winCheck()
         gameSpace.squareSan = false,
         console.log(oneArray)
         gameFlow()
@@ -110,6 +139,9 @@ function firstTurn() {
     gameSpace.fourthSquare.addEventListener('click', () => {
         if (gameSpace.squareSi == true && gameSpace.thisTurn == false) {
         oneArray.push(squareFour)
+        horizontalMiddleWin += 1
+        verticalLeftWin += 1
+        winCheck()
         gameSpace.squareSi = false;
         console.log(oneArray)
         gameFlow();
@@ -121,6 +153,11 @@ function firstTurn() {
     gameSpace.fifthSquare.addEventListener('click', () => {
         if (gameSpace.squareWu == true && gameSpace.thisTurn == false) {
         oneArray.push(squareFive)
+        horizontalMiddleWin += 1
+        verticalMiddleWin += 1
+        diagonalLeftWin += 1
+        diagonalRightWin += 1
+        winCheck()
         gameSpace.squareWu = false,
         console.log(oneArray)
         gameFlow()
@@ -132,6 +169,9 @@ function firstTurn() {
     gameSpace.sixthSquare.addEventListener('click', () => {
         if (gameSpace.squareLiu == true && gameSpace.thisTurn == false) {
         oneArray.push(squareSix)
+        horizontalMiddleWin += 1
+        verticalRightWin += 1
+        winCheck()
         gameSpace.squareLiu = false;
         console.log(oneArray)
         gameFlow();
@@ -143,6 +183,10 @@ function firstTurn() {
     gameSpace.seventhSquare.addEventListener('click', () => {
         if (gameSpace.squareQi == true && gameSpace.thisTurn == false) {
         oneArray.push(squareSeven)
+        horizontalBottomWin += 1;
+        verticalLeftWin += 1
+        diagonalRightWin += 1
+        winCheck()
         gameSpace.squareQi = false,
         console.log(oneArray)
         gameFlow()
@@ -155,6 +199,9 @@ function firstTurn() {
     gameSpace.eigthSquare.addEventListener('click', () => {
         if (gameSpace.squareBa == true && gameSpace.thisTurn == false) {
         oneArray.push(squareEight)
+        horizontalBottomWin += 1
+        verticalMiddleWin += 1
+        winCheck()
         gameSpace.squareBa = false;
         console.log(oneArray)
         gameFlow();
@@ -166,6 +213,10 @@ function firstTurn() {
     gameSpace.ninthSquare.addEventListener('click', () => {
         if (gameSpace.squareNiu == true && gameSpace.thisTurn == false) {
         oneArray.push(squareNine)
+        horizontalBottomWin += 1
+        verticalRightWin += 1
+        diagonalLeftWin += 1
+        winCheck()
         gameSpace.squareNiu = false;
         console.log(oneArray)
         gameFlow();
@@ -193,9 +244,22 @@ function secondTurn() {
     const squareEight = gameSpace.eigthSquare
     const squareNine = gameSpace.ninthSquare
 
+    let winCheckTwo = () => {
+        if (diagonalLeftWinTwo == 3 || diagonalRightWinTwo == 3 || horizontalTopWinTwo == 3 || horizontalMiddleWinTwo == 3 || horizontalBottomWinTwo == 3 || verticalLeftWinTwo == 3 || verticalMiddleWinTwo == 3 || verticalRightWinTwo == 3) {
+        const winnerVar = document.createElement('p')
+        winnerVar.textContent = 'Player O has won!'
+        const bodyVar = document.getElementById('body')
+        bodyVar.appendChild(winnerVar)
+        console.log(oneArray)
+    }else {console.log('winCheck returned false!')}}
+
     gameSpace.firstSquare.addEventListener('click', () => {
         if (gameSpace.squareYi == true && gameSpace.thisTurn == true) {
         twoArray.push(squareOne)
+        verticalLeftWinTwo += 1
+        horizontalTopWinTwo +=
+        diagonalLeftWinTwo +=
+        winCheckTwo()
         console.log(twoArray)
         gameSpace.squareYi = false;
         gameFlow();
@@ -207,6 +271,9 @@ function secondTurn() {
     gameSpace.secondSquare.addEventListener('click', () => {
         if (gameSpace.squareEr == true && gameSpace.thisTurn == true) {
         twoArray.push(squareTwo)
+        verticalMiddleWinTwo += 1
+        horizontalTopWinTwo += 1
+        winCheckTwo()
         console.log(twoArray)
         gameSpace.squareEr = false;
         gameFlow();
@@ -217,7 +284,11 @@ function secondTurn() {
 
     gameSpace.thirdSquare.addEventListener('click', () => {
         if (gameSpace.squareSan == true && gameSpace.thisTurn == true) {
-            twoArray.push(squareThree)
+        twoArray.push(squareThree)
+        horizontalTopWinTwo += 1
+        verticalRightWinTwo += 1
+        diagonalRightWinTwo += 1
+        winCheckTwo()
         gameSpace.squareSan = false,
         console.log(twoArray)
         gameFlow()
@@ -228,7 +299,10 @@ function secondTurn() {
 
     gameSpace.fourthSquare.addEventListener('click', () => {
         if (gameSpace.squareSi == true && gameSpace.thisTurn == true) {
-            twoArray.push(squareFour)
+        twoArray.push(squareFour)
+        verticalLeftWinTwo += 1
+        horizontalMiddleWinTwo +=1 
+        winCheckTwo()
         gameSpace.squareSi = false;
         console.log(twoArray)
         gameFlow();
@@ -239,7 +313,12 @@ function secondTurn() {
 
     gameSpace.fifthSquare.addEventListener('click', () => {
         if (gameSpace.squareWu == true && gameSpace.thisTurn == true) {
-            twoArray.push(squareFive)
+        twoArray.push(squareFive)
+        diagonalLeftWinTwo += 1
+        diagonalRightWinTwo +=1
+        horizontalMiddleWinTwo += 1
+        verticalMiddleWinTwo += 1
+        winCheckTwo()
         gameSpace.squareWu = false,
         console.log(twoArray)
         gameFlow()
@@ -250,7 +329,10 @@ function secondTurn() {
 
     gameSpace.sixthSquare.addEventListener('click', () => {
         if (gameSpace.squareLiu == true && gameSpace.thisTurn == true) {
-            twoArray.push(squareSix)
+        twoArray.push(squareSix)
+        verticalRightWinTwo += 1
+        horizontalMiddleWinTwo +=1
+        winCheckTwo()
         gameSpace.squareLiu = false;
         console.log(twoArray)
         gameFlow();
@@ -261,7 +343,10 @@ function secondTurn() {
 
     gameSpace.seventhSquare.addEventListener('click', () => {
         if (gameSpace.squareQi == true && gameSpace.thisTurn == true) {
-            twoArray.push(squareSeven)
+        twoArray.push(squareSeven)
+        verticalLeftWinTwo +=1 
+        horizontalBottomWinTwo +=1
+        winCheckTwo()
         gameSpace.squareQi = false,
         console.log(twoArray)
         gameFlow()
@@ -272,7 +357,10 @@ function secondTurn() {
 
     gameSpace.eigthSquare.addEventListener('click', () => {
         if (gameSpace.squareBa == true && gameSpace.thisTurn ==true) {
-            twoArray.push(squareEight)
+        twoArray.push(squareEight)
+        verticalBottomWinTwo += 1
+        horizontalBottomWinTwo += 1
+        winCheckTwo()
         gameSpace.squareBa = false;
         console.log(twoArray)
         gameFlow();
@@ -283,7 +371,11 @@ function secondTurn() {
 
     gameSpace.ninthSquare.addEventListener('click', () => {
         if (gameSpace.squareNiu == true && gameSpace.thisTurn == true) {
-            twoArray.push(squareNine)
+        twoArray.push(squareNine)
+        verticalRightWinTwo += 1
+        diagonalLeftWinTwo += 1
+        horizontalBottomWinTwo += 1
+        winCheckTwo()
         gameSpace.squareNiu = false;
         console.log(twoArray)
         gameFlow();
